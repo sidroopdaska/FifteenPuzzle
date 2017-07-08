@@ -1,10 +1,12 @@
-﻿
+﻿using System;
+using System.Collections;
+using System.Linq;
 
 namespace Search
 {
-	public delegate int CostFun(StateBase from, StateBase to);
+	public delegate int CostFunc(StateBase from, StateBase to);
 
-	public delegate int FrontierComparator(Node node1, Node node2);
+	public delegate int NodeComparator(Node node1, Node node2);
 
 	public class Searcher
 	{
@@ -17,15 +19,15 @@ namespace Search
 			_goalState = goalState;
 		}
 
-		public SearchResult BFS()
-		{
+		//public SearchResult BFS()
+		//{
 
-		}
+		//}
 
-		public SearchResult DFS()
-		{
+		//public SearchResult DFS()
+		//{
 
-		}
+		//}
 		
 		public void GenericSearch()
 		{
