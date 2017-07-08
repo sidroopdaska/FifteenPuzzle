@@ -1,7 +1,8 @@
 ﻿using System;
 
 namespace FifteenPuzzle
-{	public class Program
+{	
+	public class Program
 	{
 		public static void Main(string[] args)
 		{
@@ -9,7 +10,8 @@ namespace FifteenPuzzle
 				if(args.Length == 0)
 				{
 					RunAllTestCases();
-				} else if (args.Length == 2)
+				} 
+				else if (args.Length == 2)
 				{
 					RunSingleSearch();
 				}
