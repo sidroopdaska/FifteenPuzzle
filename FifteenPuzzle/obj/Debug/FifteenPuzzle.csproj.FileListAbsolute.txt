@@ -1,0 +1,6 @@
+c:\users\sishar\documents\visual studio 2015\Projects\FifteenPuzzle\FifteenPuzzle\bin\Debug\FifteenPuzzle.exe.config
+c:\users\sishar\documents\visual studio 2015\Projects\FifteenPuzzle\FifteenPuzzle\bin\Debug\FifteenPuzzle.exe
+c:\users\sishar\documents\visual studio 2015\Projects\FifteenPuzzle\FifteenPuzzle\bin\Debug\FifteenPuzzle.pdb
+c:\users\sishar\documents\visual studio 2015\Projects\FifteenPuzzle\FifteenPuzzle\obj\Debug\FifteenPuzzle.csprojResolveAssemblyReference.cache
+c:\users\sishar\documents\visual studio 2015\Projects\FifteenPuzzle\FifteenPuzzle\obj\Debug\FifteenPuzzle.exe
+c:\users\sishar\documents\visual studio 2015\Projects\FifteenPuzzle\FifteenPuzzle\obj\Debug\FifteenPuzzle.pdb
