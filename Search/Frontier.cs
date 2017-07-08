@@ -9,14 +9,14 @@ namespace Search
 	public class Frontier
 	{
 		private readonly NodeComparator _compareNodes;
-		private readonly IDictionary<StateBase, Node> _hashByState;
-		private readonly SortedList<Key, Node> _pQueue;
+		private readonly IDictionary<StateBase, List<Node>> _hashByState;
+		private readonly SortedList<Key, List<Node>> _pQueue;
 
 		public Frontier(NodeComparator compareNodes)
 		{
 			_compareNodes = compareNodes;
-			_hashByState = new Dictionary<StateBase, Node>();
-			_pQueue = new SortedList<Key, Node>();
+			_hashByState = new Dictionary<StateBase, List<Node>>();
+			_pQueue = new SortedList<Key, List<Node>>();
 		}
 
 		public int Count { get; private set; }
@@ -25,19 +25,22 @@ namespace Search
 		{
 			Key key = new Key(node, _compareNodes);
 
+			Count++;
+
 			// add to priority queue
 			if (!_pQueue.ContainsKey(key))
 			{
-				_pQueue.Add(key, node);
-				Count++;
+				_pQueue[key] = new List<Node>();
 			}
+			_pQueue[key].Add(node);
 
 			// add to state hash
 			if (!_hashByState.ContainsKey(node.State))
 			{
-				_hashByState[node.State] = node;
+				_hashByState[node.State] = new List<Node>();
 			}
 
+			_hashByState[node.State].Add(node);
 		}
 
 		public Node Pop()
@@ -50,36 +53,46 @@ namespace Search
 			Count--;
 
 			// pop from priority queue
-			Node node = _pQueue.First().Value;
-			_pQueue.RemoveAt(0);
+			List<Node> nodes = _pQueue.First().Value;
+			Node node = nodes.First();
+
+			if (nodes.Count > 1)
+			{
+				nodes.RemoveAt(0);
+			}
+			else
+			{
+				_pQueue.RemoveAt(0);	
+			}
 
 			// clean up state hash
-			_hashByState.Remove(node.State);
+			_hashByState[node.State].Remove(node);
 
 			return node;
 		}
 
 		public void Replace(Node inFrontier, Node newNode)
 		{
-			_hashByState.Remove(inFrontier.State);
-			_hashByState[newNode.State] = newNode;
+			_hashByState[inFrontier.State].Remove(inFrontier);
+			_hashByState[newNode.State].Add(newNode);
 
 			Key oldKey = new Key(inFrontier, _compareNodes);
 			if (_pQueue.ContainsKey(oldKey))
 			{
-				_pQueue.Remove(oldKey);
+				_pQueue[oldKey].Remove(inFrontier);
 			}
 
 			Key newKey = new Key(newNode, _compareNodes);
 			if (!_pQueue.ContainsKey(newKey))
 			{
-				_pQueue.Add(newKey, newNode);
+				_pQueue[newKey] = new List<Node>();
 			}
+			_pQueue[newKey].Add(newNode);
 		}
 
 		public Node Find(StateBase state)
 		{
-			return _hashByState.ContainsKey(state) ? _hashByState[state] : null;
+			return _hashByState.ContainsKey(state) && _hashByState[state].Count > 0 ? _hashByState[state].First() : null;
 		}
 	}
 
@@ -100,7 +113,8 @@ namespace Search
 
 		public int CompareTo(Key other)
 		{
-			return _compareNodes(_node, other._node);
+			int val = _compareNodes(_node, other._node);
+			return val;
 		}
 
 		public bool Equals(Key other)

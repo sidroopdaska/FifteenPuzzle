@@ -34,6 +34,8 @@ namespace FifteenPuzzle
 			// ((1 5 3 7) (4 9 2 11) (8 13 10 14) (12 15 0 6) (3 2))
 
 			Board = new int[4,4];
+			_valueLookup = new Dictionary<int, PuzzleSpace>();
+
 			string[] parts = stateAsString.Split(new[] { ") (" }, StringSplitOptions.None);
 
 			for (int i = 0; i < 4; i++)
@@ -63,24 +65,27 @@ namespace FifteenPuzzle
 
 		public override bool Equals(StateBase other)
 		{
-			return this.GetHashCode().Equals(other.GetHashCode());
+			return other.GetHashCode().Equals(GetHashCode());
 		}
 
 		#endregion
 
 		public override int GetHashCode()
 		{
-			int hashCode = 13;
-
-			for (int i = 0; i < 4;  i++)
+			unchecked
 			{
-				for (int j = 0; j < 4; j++)
-				{
-					hashCode = (hashCode * 397) ^ Board[i, j] ^ (i + j);
-				}	
-			}
+				int hash = 17;
 
-			return hashCode;
+				for (int i = 0; i < 4; i++)
+				{
+					for (int j = 0; j < 4; j++)
+					{
+						hash = hash * 397 + Board[i, j] ^ 23 + (i + j) ^ 19;
+					}
+				}
+
+				return hash;		
+			}
 		}
 
 		public PuzzleSpace GetSpace(int num)

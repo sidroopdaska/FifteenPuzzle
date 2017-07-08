@@ -27,6 +27,7 @@ namespace Search
 			if (_hashByState.ContainsKey(node.State))
 			{
 				_hashByState.Remove(node.State);
+				Count--;
 			}
 		}
 
