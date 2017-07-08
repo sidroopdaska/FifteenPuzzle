@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,9 +25,18 @@ namespace Search
 			return GenericSearch(_initialState, _goalState, "BFS", comparator, (state1, state2) => 1, null);
 		}
 
-		public SearchResult DFS()
+		public SearchResult DFS(int depthLimit)
 		{
-			throw new NotImplementedException();
+			string name = "DFS (DepthLimit: " + depthLimit + ")";
+			NodeComparator comparator = (node1, node2) => (-node1.Depth).CompareTo(-node2.Depth);
+			return GenericSearch(_initialState, _goalState, name, comparator, (state1, state2) => 1, null, depthLimit);
+		}
+
+		public SearchResult UCS()
+		{
+			NodeComparator comparator = (node1, node2) => node1.GHat.CompareTo(node2.GHat);
+			CostFunc cost = (state1, state2) => 1;
+			return GenericSearch(_initialState, _goalState, "UCS", comparator, cost, null);
 		}
 
 		public SearchResult GenericSearch(StateBase initialState,

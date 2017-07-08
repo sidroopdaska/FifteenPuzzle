@@ -40,13 +40,20 @@ namespace FifteenPuzzle
 
 			const string goalState1 = "((0 1 2 3) (4 5 6 7) (8 9 10 11) (12 13 14 15) (0 0))";
 			const string easyInitState = "((1 2 3 0) (4 5 6 7) (8 9 10 11) (12 13 14 15) (0 3))";
-			//const string medInitState = "((1 2 6 3) (4 5 10 7) (0 9 14 11) (8 12 13 15) (2 0))";
-			//const string hardInitState = "((1 2 3 7) (4 5 6 15) (8 9 11 0) (12 13 14 10) (2 3))";
+			const string medInitState = "((1 2 6 3) (4 5 10 7) (0 9 14 11) (8 12 13 15) (2 0))";
+			const string hardInitState = "((1 2 3 7) (4 5 6 15) (8 9 11 0) (12 13 14 10) (2 3))";
 
 			Console.WriteLine("\nGoal State 1: " + goalState1);
 			Console.WriteLine("EASY Init State: " + easyInitState + "\n");
 			RunSingleSearch(easyInitState, goalState1);
 
+			Console.WriteLine("\nGoal State 1: " + goalState1);
+			Console.WriteLine("MED Init State: " + medInitState + "\n");
+			RunSingleSearch(medInitState, goalState1);
+
+			Console.WriteLine("\nGoal State 1: " + goalState1);
+			Console.WriteLine("HARD Init State: " + hardInitState + "\n");
+			RunSingleSearch(hardInitState, goalState1);
 		}
 
 		private static void RunSingleSearch(string initStateString, string goalStateString)
@@ -64,7 +71,12 @@ namespace FifteenPuzzle
 
 			List<Thread> searchThreads = new List<Thread>()
 			{
-				new Thread(() => Console.WriteLine(searcher.BFS().ToString()))
+				new Thread(() => Console.WriteLine(searcher.BFS().ToString())),
+				new Thread(() => Console.WriteLine(searcher.DFS(6).ToString())),
+				new Thread(() => Console.WriteLine(searcher.DFS(12).ToString())),
+				new Thread(() => Console.WriteLine(searcher.DFS(18).ToString())),
+				new Thread(() => Console.WriteLine(searcher.UCS().ToString())),
+
 			};
 
 			searchThreads.ForEach(x => x.Start());
