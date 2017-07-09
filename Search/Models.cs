@@ -88,7 +88,7 @@ namespace Search
 			string result = $"Moves: ({movesString}), NodesGen: {NodesGen}, NodesPrevGen: {NodesPrevGen}, NodesOnFrontier: {NodesOnFrontier}, " +
 				$"NodesOnExplored: {NodesOnExplored}";
 			
-			return string.Format("{0}{1}{2}", name, Environment.NewLine, result);
+			return string.Format("{0} {1}", name, result);
 		}
 	}
 }

@@ -75,8 +75,7 @@ namespace FifteenPuzzle
 				new Thread(() => Console.WriteLine(searcher.DFS(6).ToString())),
 				new Thread(() => Console.WriteLine(searcher.DFS(12).ToString())),
 				new Thread(() => Console.WriteLine(searcher.DFS(18).ToString())),
-				new Thread(() => Console.WriteLine(searcher.UCS().ToString())),
-
+				new Thread(() => Console.WriteLine(searcher.UCS().ToString()))
 			};
 
 			searchThreads.ForEach(x => x.Start());
