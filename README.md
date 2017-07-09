@@ -7,13 +7,13 @@ AI Agent that solves the Fifteen Sliding Block Puzzle problem through multiple s
 * Greedy Best First Search
 * A* Search
 
-# Usage
+## Usage
 * Run "FifteenPuzzle.exe" on any Windows machine. By default, all the six search algorithms are run against a test suite of initial states and goal states, and the output is printed on to the screen.
 * To solve a specific puzzle state, from the command line type "FifteenPuzzle.exe <init_state> <goal_state>"
 
 Note: each algorithm runs on it's own thread, so the order of algorithm output may change with each trial.
 	
-# Notes on Implementation
+## Notes on Implementation
 * The business logic of the program rests within the "Search" folder that gets compiled into the "Search.dll".
 "Searcher.cs" contains the main crux of the search algorithms. The "GenericSearch" function performs the all of 
 the searches. Each specific search passes in a different "NodeComparator" that is used to keep the "Frontier" (implemented as a Priority Queue) sorted.
