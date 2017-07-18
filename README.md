@@ -18,5 +18,9 @@ Note: each algorithm runs on it's own thread, so the order of algorithm output m
 "Searcher.cs" contains the main crux of the search algorithms. The "GenericSearch" function performs the all of 
 the searches. Each specific search passes in a different "NodeComparator" that is used to keep the "Frontier" (implemented as a Priority Queue) sorted.
 * A hash table of previously visited states is maintained and all the Heuristic calculations are cached to speed things up.
-* In order to use the "GenericSearch" algorithm, the "Search.dll" requires an implementation of "StateBase" and "IHeuristic".
-This is done in the "FifteenPuzzle" folder.
+* In order to use the "GenericSearch" algorithm, the "Search.dll" requires an implementation of "StateBase" and "IHeuristic". This is done in the "FifteenPuzzle" folder.
+	
+## Heuristics
+I implemented the following heuristics to be used in conjunction with A* and Greedy Best First Search:
+* Manhattan Distance Heuristic
+* Manhattan Distance with Linear Conflict Heuristic: This achieves results faster as it takes into account the interference of tiles with each other in the horizontal/ vertical axis.
