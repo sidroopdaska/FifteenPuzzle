@@ -47,6 +47,7 @@
     <Compile Include="Searcher.cs" />
     <Compile Include="IHeuristic.cs" />
     <Compile Include="HeuristicCache.cs" />
+    <Compile Include="HeuristicBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

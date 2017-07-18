@@ -37,6 +37,20 @@ namespace Search
 			NodeComparator comparator = (node1, node2) => node1.GHat.CompareTo(node2.GHat);
 			CostFunc cost = (state1, state2) => 1;
 			return GenericSearch(_initialState, _goalState, "UCS", comparator, cost, null);
+		}	
+
+		public SearchResult GreedyBestFirstSearch(IHeuristic heuristic)
+		{
+			NodeComparator comparator = (node1, node2) => node1.HHat.CompareTo(node2.HHat);
+			return GenericSearch(_initialState, _goalState, "Greedy Best First Search",
+			                    comparator, (state1, state2) => 1, heuristic);
+		}
+
+		public SearchResult AStarSearch(IHeuristic heuristic)
+		{
+			NodeComparator comparator = (node1, node2) => node1.FHat.CompareTo(node2.FHat);
+			return GenericSearch(_initialState, _goalState, "AStar",
+								comparator, (state1, state2) => 1, heuristic);
 		}
 
 		public SearchResult GenericSearch(StateBase initialState,
